@@ -7,8 +7,9 @@ use Illuminate\Foundation\Testing\WithFaker;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class CreateContactsTest extends TestCase
+class ContactsTest extends TestCase
 {
+    use RefreshDatabase;
     #[Test]
     public function it_should_be_able_to_create_a_new_contact(): void
     {
@@ -18,9 +19,9 @@ class CreateContactsTest extends TestCase
             'phone' => '(41) 98899-4422'
         ];
 
-        $response = $this->post('/contacts', $data);
+        $response =  $this->post(route('contacts.store'), $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(201);
 
 
         $expected = $data;
@@ -74,7 +75,7 @@ class CreateContactsTest extends TestCase
 
         $response = $this->delete("/contacts/{$contact->id}");
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
 
         $this->assertDatabaseMissing('contacts', $contact->toArray());
     }
@@ -112,7 +113,7 @@ class CreateContactsTest extends TestCase
 
         $response = $this->put("/contacts/{$contact->id}", $data);
 
-        $response->assertStatus(200);
+        $response->assertStatus(204);
 
         $expected = $data;
 
