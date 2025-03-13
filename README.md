@@ -21,6 +21,12 @@ Este documento descreve os passos necessários para configurar e iniciar o proje
    php artisan migrate
    php artisan test
    ```
+3. **Em outro termina** e execute os seguintes comandos:
+   ```sh
+    npm i
+    npm run dev || npm run build
+   
+   ```
 
 ## Comandos Explicados
 - `make dev`: Inicializa os containers do projeto.
